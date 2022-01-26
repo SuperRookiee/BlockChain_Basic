@@ -39,7 +39,7 @@ public class Transaction {
 	}
 
 	public String getInformation() {
-		return sender + "이(가) " + receiver + "에게 " + amount + "개의 코인을 보냈습니다.";
+		return sender + "님이 " + receiver + "에게 " + amount + "원을 보냈습니다.";
 	}
 
 }

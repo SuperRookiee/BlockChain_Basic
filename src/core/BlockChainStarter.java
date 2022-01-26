@@ -1,12 +1,14 @@
 package core;
 
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.FileReader;
 
+import util.SQL;
 import util.Util;
 
 public class BlockChainStarter {	//블록체인이 실질적으로 동작하는 메인함수가 포함되어있는 함수
@@ -19,8 +21,8 @@ public class BlockChainStarter {	//블록체인이 실질적으로 동작하는 
 //		five();
 //		six();
 		Origin_BlockChain();
-//		Hacked_BlockChain();
-
+		Hacked_BlockChain();
+		Check();
 	}//main ends
 
 	public static void one() {
@@ -124,6 +126,7 @@ public class BlockChainStarter {	//블록체인이 실질적으로 동작하는 
 
 
 	public static void Origin_BlockChain() throws IOException, SQLException, ClassNotFoundException {
+		boolean Auth = true;
 		BufferedReader reader = new BufferedReader(new FileReader("./resources/Data.txt"));
 		String str;
 		ArrayList<String> key = new ArrayList<>();
@@ -136,26 +139,29 @@ public class BlockChainStarter {	//블록체인이 실질적으로 동작하는 
 		System.out.println("\n<List>");
 		int n = key.size();	//블록 갯수 (n+1)
 		Block[] block = new Block[n+1];
+		Connection conn = SQL.getConnection();	//DB연결
 		for (int i=1; i <block.length; i++){
 			if(i==1){
 				block[i] = new Block (i, null, 0, new ArrayList());
 				block[i].addTransaction(new Transaction(key.get(i-1).split(" ")[0], key.get(i-1).split(" ")[1],Integer.parseInt(key.get(i-1).split(" ")[2])));
 				block[i].mine();
 				block[i].getInformation();
-				block[i].Record(true);
+				SQL.init(conn, Auth);
+				block[i].Record(Auth);
 			}
 			else{
 				block[i] = new Block (i, block[i-1].getBlockHash(), 0, new ArrayList());
 				block[i].addTransaction(new Transaction(key.get(i-1).split(" ")[0], key.get(i-1).split(" ")[1],Integer.parseInt(key.get(i-1).split(" ")[2])));
 				block[i].mine();
 				block[i].getInformation();
-				block[i].Record(true);
+				block[i].Record(Auth);
 			}
 
 		}
 	}
 
 	public static void Hacked_BlockChain() throws IOException, SQLException, ClassNotFoundException {
+		boolean Auth = false;
 		BufferedReader reader = new BufferedReader(new FileReader("./resources/Data_hack.txt"));
 		String str;
 		ArrayList<String> key = new ArrayList<>();
@@ -168,26 +174,37 @@ public class BlockChainStarter {	//블록체인이 실질적으로 동작하는 
 		System.out.println("\n<List>");
 		int n = key.size();	//블록 갯수 (n+1)
 		Block[] block = new Block[n+1];
+		Connection conn = SQL.getConnection();	//DB연결
 		for (int i=1; i <block.length; i++){
 			if(i==1){
 				block[i] = new Block (i, null, 0, new ArrayList());
 				block[i].addTransaction(new Transaction(key.get(i-1).split(" ")[0], key.get(i-1).split(" ")[1],Integer.parseInt(key.get(i-1).split(" ")[2])));
 				block[i].mine();
 				block[i].getInformation();
-				block[i].Record(false);
+				SQL.init(conn, Auth);
+				block[i].Record(Auth);
 			}
 			else{
 				block[i] = new Block (i, block[i-1].getBlockHash(), 0, new ArrayList());
 				block[i].addTransaction(new Transaction(key.get(i-1).split(" ")[0], key.get(i-1).split(" ")[1],Integer.parseInt(key.get(i-1).split(" ")[2])));
 				block[i].mine();
 				block[i].getInformation();
-				block[i].Record(false);
+				block[i].Record(Auth);
 			}
 
 		}
 	}
 
-	public static void nine() throws IOException, SQLException {
+	public static void Check() throws SQLException, ClassNotFoundException {
+		Connection conn = SQL.getConnection();	//DB연결
+		int state = SQL.compare(conn);
+
+		if(state == 0){
+			System.out.println("변경된 데이터는 없습니다");
+		}
+		else {
+			System.out.println(state + "번 Block에 변경된 데이터가 존재합니다");
+		}
 
 	}
 

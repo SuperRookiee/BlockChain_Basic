@@ -59,7 +59,6 @@ public class Block {
 	//DB 저장
 	public void Record(boolean Auth) throws SQLException, ClassNotFoundException {
 		Connection conn = SQL.getConnection();	//DB연결
-
 		PreparedStatement pstmt = conn.prepareStatement("INSERT INTO Record"+Auth+"(blockId, previousBlockHash, nonce, trCnt, BlockHash) values(?,?,?,?,?)");
 		pstmt.setInt(1, getBlockId());
 		pstmt.setString(2, getPreviousBlockHash());
