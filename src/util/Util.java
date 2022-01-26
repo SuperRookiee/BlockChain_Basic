@@ -4,7 +4,7 @@ import java.security.MessageDigest;
 
 public class Util {
 
-	public static String getHash(String input) {	//어떤 입력값이 들어왔을때 Hash값을 구해주는 함수
+	public static String getHash(String input) { //어떤 입력값이 들어왔을때 Hash값을 구해주는 함수
 		StringBuffer result = new StringBuffer();	//문자열 생성하는 객체
 		try {
 			MessageDigest md = MessageDigest.getInstance("SHA-256");	//암호화 같은경우 MessageDigest를 자주 이용
@@ -20,4 +20,7 @@ public class Util {
 		}
 		return result.toString();
 	}
+
+
+
 }

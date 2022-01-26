@@ -1,8 +1,9 @@
 package core;
 
+import java.sql.*;
 import java.util.ArrayList;
-
 import util.Util;
+import util.SQL;
 
 public class Block {
 
@@ -53,9 +54,25 @@ public class Block {
 		}
 		System.out.println("블록 해시: " + getBlockHash());
 		System.out.println("--------------------------------------");
-
 	}
 
+	//DB 저장
+	public void Record(boolean Auth) throws SQLException, ClassNotFoundException {
+		Connection conn = SQL.getConnection();	//DB연결
+
+		PreparedStatement pstmt = conn.prepareStatement("INSERT INTO Record"+Auth+"(blockId, previousBlockHash, nonce, trCnt, BlockHash) values(?,?,?,?,?)");
+		pstmt.setInt(1, getBlockId());
+		pstmt.setString(2, getPreviousBlockHash());
+		pstmt.setInt(3,getNonce());
+		pstmt.setInt(4, transactionList.size());
+		pstmt.setString(5, getBlockHash());
+		pstmt.executeUpdate();
+		System.out.println("DB에 데이터 저장 완료!");
+
+		//접속 종료
+		conn.close();
+		pstmt.close();
+	}
 
 
 	//생성자

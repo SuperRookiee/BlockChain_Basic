@@ -5,9 +5,9 @@ package core;
 public class Transaction {
 	String sender;
 	String receiver;
-	double amount;
+	int amount;
 
-	public Transaction(String sender, String receiver, double amount) {
+	public Transaction(String sender, String receiver, int amount) {
 		super();
 		this.sender = sender;
 		this.receiver = receiver;
@@ -34,7 +34,7 @@ public class Transaction {
 		return amount;
 	}
 
-	public void setAmount(double amount) {
+	public void setAmount(int amount) {
 		this.amount = amount;
 	}
 
