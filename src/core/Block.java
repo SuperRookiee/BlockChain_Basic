@@ -66,7 +66,6 @@ public class Block {
 		pstmt.setInt(4, transactionList.size());
 		pstmt.setString(5, getBlockHash());
 		pstmt.executeUpdate();
-		System.out.println("DB에 데이터 저장 완료!");
 
 		//접속 종료
 		conn.close();

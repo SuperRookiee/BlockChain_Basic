@@ -44,9 +44,7 @@ public class BlockChainStarter {	//블록체인이 실질적으로 동작하는 
 	}
 
 	public static void three() {
-
 		// data -> Transaction
-
 //		Block block1 = new Block (1, null, 0, "데이터");					//블록 번호:1 , nonce:0
 //		block1.mine();
 //		block1.getInformation();
@@ -127,6 +125,7 @@ public class BlockChainStarter {	//블록체인이 실질적으로 동작하는 
 
 	public static void Origin_BlockChain() throws IOException, SQLException, ClassNotFoundException {
 		boolean Auth = true;
+		System.out.println("Origin");
 		BufferedReader reader = new BufferedReader(new FileReader("./resources/Data.txt"));
 		String str;
 		ArrayList<String> key = new ArrayList<>();
@@ -162,6 +161,7 @@ public class BlockChainStarter {	//블록체인이 실질적으로 동작하는 
 
 	public static void Hacked_BlockChain() throws IOException, SQLException, ClassNotFoundException {
 		boolean Auth = false;
+		System.out.println("Hacked");
 		BufferedReader reader = new BufferedReader(new FileReader("./resources/Data_hack.txt"));
 		String str;
 		ArrayList<String> key = new ArrayList<>();
