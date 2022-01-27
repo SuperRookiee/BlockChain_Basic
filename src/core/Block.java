@@ -50,7 +50,7 @@ public class Block {
 		System.out.println("채굴 변수 값: " + getNonce());
 		System.out.println("트랜잭션 개수: " + transactionList.size() + "개");
 		for(int i=0; i<transactionList.size(); i++) {
-			System.out.println("Data: " + transactionList.get(i).getInformation());
+			System.out.println(transactionList.get(i).getInformation());
 		}
 		System.out.println("블록 해시: " + getBlockHash());
 		System.out.println("--------------------------------------");

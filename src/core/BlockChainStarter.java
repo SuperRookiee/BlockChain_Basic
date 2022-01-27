@@ -74,7 +74,7 @@ public class BlockChainStarter {	//블록체인이 실질적으로 동작하는 
 	public static void Check() throws SQLException, ClassNotFoundException {
 		Connection conn = SQL.getConnection();
 		int state = SQL.compare(conn);
-
+		System.out.println("\nCheck");
 		if(state == 0){
 			System.out.println("변경된 데이터는 없습니다");
 		}
