@@ -26,7 +26,7 @@ public class BlockChainStarter {	//블록체인이 실질적으로 동작하는 
 		for (int i=1; i <block.length; i++){
 			if(i==1){
 				block[i] = new Block (i, null, 0, new ArrayList());
-				block[i].addTransaction(new Transaction(key.get(i-1).split(" ")[0], key.get(i-1).split(" ")[1],Integer.parseInt(key.get(i-1).split(" ")[2])));
+				block[i].addTransaction(new Transaction(key.get(i-1)));
 				block[i].mine();
 				block[i].getInformation();
 				SQL.init(conn, Auth);
@@ -34,7 +34,7 @@ public class BlockChainStarter {	//블록체인이 실질적으로 동작하는 
 			}
 			else{
 				block[i] = new Block (i, block[i-1].getBlockHash(), 0, new ArrayList());
-				block[i].addTransaction(new Transaction(key.get(i-1).split(" ")[0], key.get(i-1).split(" ")[1],Integer.parseInt(key.get(i-1).split(" ")[2])));
+				block[i].addTransaction(new Transaction(key.get(i-1)));
 				block[i].mine();
 				block[i].getInformation();
 				block[i].Record(Auth);
@@ -54,7 +54,7 @@ public class BlockChainStarter {	//블록체인이 실질적으로 동작하는 
 		for (int i=1; i <block.length; i++){
 			if(i==1){
 				block[i] = new Block (i, null, 0, new ArrayList());
-				block[i].addTransaction(new Transaction(key.get(i-1).split(" ")[0], key.get(i-1).split(" ")[1],Integer.parseInt(key.get(i-1).split(" ")[2])));
+				block[i].addTransaction(new Transaction(key.get(i-1)));
 				block[i].mine();
 				block[i].getInformation();
 				SQL.init(conn, Auth);
@@ -62,7 +62,7 @@ public class BlockChainStarter {	//블록체인이 실질적으로 동작하는 
 			}
 			else{
 				block[i] = new Block (i, block[i-1].getBlockHash(), 0, new ArrayList());
-				block[i].addTransaction(new Transaction(key.get(i-1).split(" ")[0], key.get(i-1).split(" ")[1],Integer.parseInt(key.get(i-1).split(" ")[2])));
+				block[i].addTransaction(new Transaction(key.get(i-1)));
 				block[i].mine();
 				block[i].getInformation();
 				block[i].Record(Auth);
