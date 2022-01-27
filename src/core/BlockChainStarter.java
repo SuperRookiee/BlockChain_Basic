@@ -8,6 +8,7 @@ import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.FileReader;
 
+import util.ReadFile;
 import util.SQL;
 import util.Util;
 
@@ -93,7 +94,7 @@ public class BlockChainStarter {	//블록체인이 실질적으로 동작하는 
 	}
 
 	public static void six() throws IOException {
-		BufferedReader reader = new BufferedReader(new FileReader("./resources/Data.txt"));
+		BufferedReader reader = new BufferedReader(new FileReader("./resources/Data_Origin.txt"));
 		String str;
 		ArrayList<String> key = new ArrayList<>();
 		while ((str = reader.readLine()) != null) {
@@ -125,20 +126,22 @@ public class BlockChainStarter {	//블록체인이 실질적으로 동작하는 
 
 	public static void Origin_BlockChain() throws IOException, SQLException, ClassNotFoundException {
 		boolean Auth = true;
-		System.out.println("Origin");
-		BufferedReader reader = new BufferedReader(new FileReader("./resources/Data.txt"));
-		String str;
-		ArrayList<String> key = new ArrayList<>();
-		while ((str = reader.readLine()) != null) {
-			System.out.println(str);
-			key.add(str);
-		}
-		reader.close();
+//		System.out.println("Origin");
+//		BufferedReader reader = new BufferedReader(new FileReader("./resources/Data_Origin.txt"));
+//		String str;
+//		ArrayList<String> key = new ArrayList<>();
+//		while ((str = reader.readLine()) != null) {
+//			System.out.println(str);
+//			key.add(str);
+//		}
+//		reader.close();
+
+		ArrayList<String> key = ReadFile.read("Origin");
 
 		System.out.println("\n<List>");
 		int n = key.size();	//블록 갯수 (n+1)
 		Block[] block = new Block[n+1];
-		Connection conn = SQL.getConnection();	//DB연결
+		Connection conn = SQL.getConnection(); //DB연결
 		for (int i=1; i <block.length; i++){
 			if(i==1){
 				block[i] = new Block (i, null, 0, new ArrayList());
@@ -161,20 +164,22 @@ public class BlockChainStarter {	//블록체인이 실질적으로 동작하는 
 
 	public static void Hacked_BlockChain() throws IOException, SQLException, ClassNotFoundException {
 		boolean Auth = false;
-		System.out.println("Hacked");
-		BufferedReader reader = new BufferedReader(new FileReader("./resources/Data_hack.txt"));
-		String str;
-		ArrayList<String> key = new ArrayList<>();
-		while ((str = reader.readLine()) != null) {
-			System.out.println(str);
-			key.add(str);
-		}
-		reader.close();
+//		System.out.println("Hacked");
+//		BufferedReader reader = new BufferedReader(new FileReader("./resources/Data_Hack.txt"));
+//		String str;
+//		ArrayList<String> key = new ArrayList<>();
+//		while ((str = reader.readLine()) != null) {
+//			System.out.println(str);
+//			key.add(str);
+//		}
+//		reader.close();
+
+		ArrayList<String> key = ReadFile.read("Hack");
 
 		System.out.println("\n<List>");
 		int n = key.size();	//블록 갯수 (n+1)
 		Block[] block = new Block[n+1];
-		Connection conn = SQL.getConnection();	//DB연결
+		Connection conn = SQL.getConnection(); //DB연결
 		for (int i=1; i <block.length; i++){
 			if(i==1){
 				block[i] = new Block (i, null, 0, new ArrayList());
@@ -196,7 +201,7 @@ public class BlockChainStarter {	//블록체인이 실질적으로 동작하는 
 	}
 
 	public static void Check() throws SQLException, ClassNotFoundException {
-		Connection conn = SQL.getConnection();	//DB연결
+		Connection conn = SQL.getConnection();
 		int state = SQL.compare(conn);
 
 		if(state == 0){
