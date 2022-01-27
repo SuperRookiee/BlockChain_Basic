@@ -1,6 +1,8 @@
 package util;
 
+import java.security.Key;
 import java.security.MessageDigest;
+import java.util.Base64;
 
 public class Util {
 
@@ -19,6 +21,10 @@ public class Util {
 			e.printStackTrace();
 		}
 		return result.toString();
+	}
+
+	public static String getStringFromKey(Key key) {
+		return Base64.getEncoder().encodeToString(key.getEncoded());
 	}
 
 
