@@ -10,7 +10,6 @@ public class authentication {
 
 
     public static void main(String[] arg) {
-
         //Setup Bouncey castle as a Security Provider
         Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
 
